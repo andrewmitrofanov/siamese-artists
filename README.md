@@ -88,7 +88,10 @@
 Разделение на train/val: 80/20.
 
 ### Краткая описание стилей живописи:
+
 ![Art styles](/images/art-styles.jpg)
+
+Живописные стили довольно сильно отличаются. Ожидаем, что сеть выучит эти различия и будет легко отличать художников, творивших в разных стилях.
 
 ### Конфигурация сети
 Сеть, показавшая наилучшие результаты, имеет следующую конфигурацию:
@@ -101,7 +104,7 @@
 
 # Ссылки
 
-[1] Bromley, Jane, et al. ["Signature Verification using a 'Siamese' Time Delay Neural Network" Advances in neural information processing systems. 1994] (http://papers.nips.cc/paper/769-signature-verification-using-a-siamese-time-delay-neural-network.pdf)
+[1] Bromley, Jane, et al. ["Signature Verification using a 'Siamese' Time Delay Neural Network" Advances in neural information processing systems. 1994](http://papers.nips.cc/paper/769-signature-verification-using-a-siamese-time-delay-neural-network.pdf)
 
 [101] Raia Hadsell, Sumit Chopra, Yann LeCun, [Dimensionality reduction by learning an invariant mapping](http://yann.lecun.com/exdb/publis/pdf/hadsell-chopra-lecun-06.pdf), CVPR 2006
 
