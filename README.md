@@ -2,9 +2,11 @@
 (С использованием siamese networks и triplet loss)
 
 ## Задача
+
 Научить нейронную сеть определять художника по изображению картины, которую сеть ранее "не видела".
 
 ## Используемые технологии
+
 В основе проекта - использование "сиамских" сетей (впервые предложенных в работе [1]) и "триплет лосса" [2]
 
 
@@ -23,18 +25,23 @@
 В хорошо сформированном пространстве вектора разных классов будут образовывать чётко различимые кластеры.
 
 ## Обучение сети на простом датасете
+
 Для начала было решено проверить работоспособность выбранной конфигурации сети на простом наборе данных.
 
 ### Описание датасета
+
 В качестве такого набора был выбран **Stanford Dogs Dataset**, содержащий порядка 19 000 изображений 120 пород собак (все они входят в ImageNet).
 Все фотографии были тщательно изучены и в итоге оставлены только те, на которых присутствует ровно одно чётко различимое животное.
 
 ### Конфигурация сети
+
 В качестве свёрточной сети была выбрана сеть с архитектурой **senet154**, предварительно обученная на ImageNet. Таким образом сеть ранее "видела" весь датасет.
 
 Вся сеть заморожена.
 Полносвязные слои сети были заменены на: 2048->128+Tanh(). Они разморожены.
 Обучение: 5 эпох.
+
+### Полученные результаты
 
 Достигнутая точность **(normalized accuracy): 0.82**.
 
@@ -47,6 +54,7 @@
 
 ## Обучение сети на полноценном датасете
 ### Описание датасета
+
 Для обучения сети был собран датасет, состоящий из произведений 30 художников:
 
 | Художник | Стиль | Количество изображений |
@@ -93,13 +101,18 @@
 Живописные стили довольно сильно отличаются. Ожидаем, что сеть выучит эти различия и будет легко отличать художников, творивших в разных стилях.
 
 ### Конфигурация сети
+
 Сеть, показавшая наилучшие результаты, имеет следующую конфигурацию:
 * Свёрточная сеть - **resnet101**. Заморожена, кроме layer4.
 * Полносвязные слои сети были заменены на: 2048->128+Tanh(). Они разморожены.
 * Adam. Lr = 0.0005. lr_scheduler.StepLR(optimizer, 10, gamma=0.2)
 * 30 эпох.
 * Стратегия формирования батча - сбалансированный батч, состоящий из 8 классов, по 16 примеров в каждом.
-* Лосс считается между всеми возможными триплетами.
+* Лосс считается между всеми возможными триплетами. (Про стратегии формирования батча и методы выбора троек для подсчёта лосса упоминается в [2] и [3].)
+
+### Полученные результаты
+
+
 
 # Ссылки
 
@@ -107,14 +120,4 @@
 
 [2] Schroff, Florian, Dmitry Kalenichenko, and James Philbin. [Facenet: A unified embedding for face recognition and clustering. CVPR 2015.](https://arxiv.org/pdf/1503.03832.pdf)
 
-[101] Raia Hadsell, Sumit Chopra, Yann LeCun, [Dimensionality reduction by learning an invariant mapping](http://yann.lecun.com/exdb/publis/pdf/hadsell-chopra-lecun-06.pdf), CVPR 2006
-
-[102] Schroff, Florian, Dmitry Kalenichenko, and James Philbin. [Facenet: A unified embedding for face recognition and clustering.](https://arxiv.org/abs/1503.03832) CVPR 2015
-
-[103] Alexander Hermans, Lucas Beyer, Bastian Leibe, [In Defense of the Triplet Loss for Person Re-Identification](https://arxiv.org/pdf/1703.07737), 2017
-
-[104] Brandon Amos, Bartosz Ludwiczuk, Mahadev Satyanarayanan, [OpenFace: A general-purpose face recognition library with mobile applications](http://reports-archive.adm.cs.cmu.edu/anon/2016/CMU-CS-16-118.pdf), 2016
-
-[105] Yi Sun, Xiaogang Wang, Xiaoou Tang, [Deep Learning Face Representation by Joint Identification-Verification](http://papers.nips.cc/paper/5416-deep-learning-face-representation-by-joint-identification-verification), NIPS 2014
-
-
+[3] Alexander Hermans, Lucas Beyer, Bastian Leibe, [In Defense of the Triplet Loss for Person Re-Identification](https://arxiv.org/pdf/1703.07737), 2017
