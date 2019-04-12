@@ -5,8 +5,7 @@
 Научить нейронную сеть определять художника по изображению картины, которую сеть ранее "не видела".
 
 ## Используемые технологии
-В основе проекта - использование "сиамских" сетей (впервые предложенных в работе [1]) и "триплет лосса"
-(Schroff, Florian, Dmitry Kalenichenko, and James Philbin. Facenet: A unified embedding for face recognition and clustering. CVPR 2015. https://arxiv.org/pdf/1503.03832.pdf)
+В основе проекта - использование "сиамских" сетей (впервые предложенных в работе [1]) и "триплет лосса" [2]
 
 
 Схематично структуру используемой сети можно изобразить так:
@@ -95,9 +94,9 @@
 
 ### Конфигурация сети
 Сеть, показавшая наилучшие результаты, имеет следующую конфигурацию:
-* Свёрточная сеть - *resnet101*. Заморожена, кроме layer4.
+* Свёрточная сеть - **resnet101**. Заморожена, кроме layer4.
 * Полносвязные слои сети были заменены на: 2048->128+Tanh(). Они разморожены.
-* Adam. Lr = 5*1e-4. lr_scheduler.StepLR(optimizer, 10, gamma=0.2)
+* Adam. Lr = 0.0005. lr_scheduler.StepLR(optimizer, 10, gamma=0.2)
 * 30 эпох.
 * Стратегия формирования батча - сбалансированный батч, состоящий из 8 классов, по 16 примеров в каждом.
 * Лосс считается между всеми возможными триплетами.
@@ -105,6 +104,8 @@
 # Ссылки
 
 [1] Bromley, Jane, et al. ["Signature Verification using a 'Siamese' Time Delay Neural Network" Advances in neural information processing systems. 1994](http://papers.nips.cc/paper/769-signature-verification-using-a-siamese-time-delay-neural-network.pdf)
+
+[2] Schroff, Florian, Dmitry Kalenichenko, and James Philbin. [Facenet: A unified embedding for face recognition and clustering. CVPR 2015.](https://arxiv.org/pdf/1503.03832.pdf)
 
 [101] Raia Hadsell, Sumit Chopra, Yann LeCun, [Dimensionality reduction by learning an invariant mapping](http://yann.lecun.com/exdb/publis/pdf/hadsell-chopra-lecun-06.pdf), CVPR 2006
 
