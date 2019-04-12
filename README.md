@@ -9,3 +9,4 @@
 (Schroff, Florian, Dmitry Kalenichenko, and James Philbin. Facenet: A unified embedding for face recognition and clustering. CVPR 2015. https://arxiv.org/pdf/1503.03832.pdf)
 
 Схематично структуру используемой сети можно изобразить так:
+![Diagram with siamese network with triplet loss](/images/siamese-triplet-diagram.jpg)
