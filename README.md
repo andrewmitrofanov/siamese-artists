@@ -5,7 +5,7 @@
 Научить нейронную сеть определять художника по изображению картины, которую сеть ранее "не видела".
 
 ## Используемые технологии
-В основе проекта - использование "сиамских" сетей (впервые предложенных в работе Bromley, Jane, et al. "Signature Verification using a 'Siamese' Time Delay Neural Network" Advances in neural information processing systems. 1994. http://papers.nips.cc/paper/769-signature-verification-using-a-siamese-time-delay-neural-network.pdf) и "триплет лосса"
+В основе проекта - использование "сиамских" сетей (впервые предложенных в работе [1]) и "триплет лосса"
 (Schroff, Florian, Dmitry Kalenichenko, and James Philbin. Facenet: A unified embedding for face recognition and clustering. CVPR 2015. https://arxiv.org/pdf/1503.03832.pdf)
 
 
@@ -26,9 +26,11 @@
 ## Обучение сети на простом датасете
 Для начала было решено проверить работоспособность выбранной конфигурации сети на простом наборе данных.
 
+### Описание датасета
 В качестве такого набора был выбран **Stanford Dogs Dataset**, содержащий порядка 19 000 изображений 120 пород собак (все они входят в ImageNet).
 Все фотографии были тщательно изучены и в итоге оставлены только те, на которых присутствует ровно одно чётко различимое животное.
 
+### Конфигурация сети
 В качестве свёрточной сети была выбрана сеть с архитектурой **senet154**, предварительно обученная на ImageNet. Таким образом сеть ранее "видела" весь датасет.
 
 Вся сеть заморожена.
@@ -87,5 +89,28 @@
 
 ### Краткая описание стилей живописи:
 ![Art styles](/images/art-styles.jpg)
+
+### Конфигурация сети
+Сеть, показавшая наилучшие результаты, имеет следующую конфигурацию:
+* Свёрточная сеть - resnet101. Заморожена, кроме layer4.
+* Полносвязные слои сети были заменены на: 2048->128+Tanh(). Они разморожены.
+* Adam. Lr = 5*1e-4. lr_scheduler.StepLR(optimizer, 10, gamma=0.2)
+* 30 эпох.
+* Стратегия формирования батча - сбалансированный батч, состоящий из 8 классов, по 16 примеров в каждом.
+* Лосс считается между всеми возможными триплетами.
+
+# Ссылки
+
+[1] Bromley, Jane, et al. ["Signature Verification using a 'Siamese' Time Delay Neural Network" Advances in neural information processing systems. 1994] (http://papers.nips.cc/paper/769-signature-verification-using-a-siamese-time-delay-neural-network.pdf)
+
+[101] Raia Hadsell, Sumit Chopra, Yann LeCun, [Dimensionality reduction by learning an invariant mapping](http://yann.lecun.com/exdb/publis/pdf/hadsell-chopra-lecun-06.pdf), CVPR 2006
+
+[102] Schroff, Florian, Dmitry Kalenichenko, and James Philbin. [Facenet: A unified embedding for face recognition and clustering.](https://arxiv.org/abs/1503.03832) CVPR 2015
+
+[103] Alexander Hermans, Lucas Beyer, Bastian Leibe, [In Defense of the Triplet Loss for Person Re-Identification](https://arxiv.org/pdf/1703.07737), 2017
+
+[104] Brandon Amos, Bartosz Ludwiczuk, Mahadev Satyanarayanan, [OpenFace: A general-purpose face recognition library with mobile applications](http://reports-archive.adm.cs.cmu.edu/anon/2016/CMU-CS-16-118.pdf), 2016
+
+[105] Yi Sun, Xiaogang Wang, Xiaoou Tang, [Deep Learning Face Representation by Joint Identification-Verification](http://papers.nips.cc/paper/5416-deep-learning-face-representation-by-joint-identification-verification), NIPS 2014
 
 
