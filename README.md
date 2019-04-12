@@ -2,7 +2,7 @@
 (С использованием siamese networks и triplet loss)
 
 ## Задача
-Обучить нейронную сеть определять художника по изображению картины, которую сеть ранее "не видела".
+Научить нейронную сеть определять художника по изображению картины, которую сеть ранее "не видела".
 
 ## Используемые технологии
 В основе проекта - использование "сиамских" сетей (впервые предложенных в работе Bromley, Jane, et al. "Signature Verification using a 'Siamese' Time Delay Neural Network" Advances in neural information processing systems. 1994. http://papers.nips.cc/paper/769-signature-verification-using-a-siamese-time-delay-neural-network.pdf) и "триплет лосса"
