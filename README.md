@@ -1,5 +1,5 @@
 # Определение художника по изображению картины
-(С использованием siamese networks и triplet loss)
+(С использованием Siamese Networks и Triplet Loss)
 
 ## Задача
 
@@ -112,7 +112,15 @@
 
 ### Полученные результаты
 
+Достигнутая точность **(normalized accuracy): 0.73**.
 
+### Обсуждение результатов и дальнейшие исследования
+Достигнутую точность нельзя назвать идеальной.
+Однако и Triplet Loss нельзя назвать оптимальной функцией потерь при работе с сиамскими сетями (см, например, статью [4]).
+
+В дальнейших исследованиях можно оценить влияние различных loss-функций на точность классификации: см. [5] и [6].
+
+Кроме того, имеет смысл изучить применение метода, при котором сначала на основе сети обучается классификатор, а затем, сеть преобразуется в сиамскую и дообучается с использованием одной из функций потерь.
 
 # Ссылки
 
@@ -120,4 +128,10 @@
 
 [2] Schroff, Florian, Dmitry Kalenichenko, and James Philbin. [Facenet: A unified embedding for face recognition and clustering. CVPR 2015.](https://arxiv.org/pdf/1503.03832.pdf)
 
-[3] Alexander Hermans, Lucas Beyer, Bastian Leibe, [In Defense of the Triplet Loss for Person Re-Identification](https://arxiv.org/pdf/1703.07737), 2017
+[3] Alexander Hermans, Lucas Beyer, Bastian Leibe, 2017. [In Defense of the Triplet Loss for Person Re-Identification](https://arxiv.org/pdf/1703.07737)
+
+[4] Rippel et al. [Metric Learning With Adaptive Density Discrimination](https://arxiv.org/pdf/1511.05939.pdf)
+
+[5] Jiankang Deng et al. [ArcFace: Additive Angular Margin Loss for Deep Face Recognition. 2018](https://arxiv.org/pdf/1801.07698v1.pdf)
+
+[6] Mei Wang, Weihong Deng [Deep Face Recognition: A Survey. 2019](https://arxiv.org/pdf/1804.06655.pdf)
