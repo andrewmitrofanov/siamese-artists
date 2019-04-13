@@ -113,7 +113,7 @@
 ### Полученные результаты
 
 Достигнутая точность **(normalized accuracy): 0.73**.
-![Art styles](/images/confusion-matrix.jpg)
+![Confusion matrix](/images/confusion-matrix.jpg)
 
 По confusion matrix видно, что сеть часто путает художников, чьи произведения относятся к одному стилю.
 
